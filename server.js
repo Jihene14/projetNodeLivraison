@@ -16,7 +16,10 @@ const corsOpts = {
   };
 
 connectToBd();
-app.use(cors(corsOpts));
+app.use(cors({corsOpts,
+  Credentials : true,
+  origin:['http//localhost:3000','http//localhost:8080','http//localhost:4200']
+}));
 app.use(express.json());
 app.use("/clients", clientRouter);
 app.use("/products", productRouter);

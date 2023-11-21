@@ -5,11 +5,11 @@ const livraisonSchema = new mongoose.Schema({
         type: Number,
         require:true,
     },
-    num_commande:{
+    commandes:[{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'commande',
         require:true,
-    },
+    }],
     livreur:{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'livreur',

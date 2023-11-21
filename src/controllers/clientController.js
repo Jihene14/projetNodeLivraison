@@ -1,6 +1,8 @@
 
 import Client from "../models/client.js";
-import Commande from "../models/commande.js"
+import Commande from "../models/commande.js";
+import jwt from "jsonwebtoken";
+import secret from "../vars/var.js"
 
 const getAllClient = async (req, res) =>{
     try{
@@ -13,7 +15,7 @@ const getAllClient = async (req, res) =>{
     }
 };
 
-const addClient = async (req,res)=>{
+const registerClient = async (req,res)=>{
      try{
       const  newClient = new Client(req.body);
           await  newClient.save();
@@ -29,6 +31,7 @@ const addClient = async (req,res)=>{
 const getClientById = async(req,res)=>{
     try{
         const client = await Client.findById(req.params.id);
+       
         res.send(client);
     }
     catch(e){
@@ -58,22 +61,26 @@ const updateClient = async (req,res)=>{
         res.send(e);
     }
  };
-
+ 
  const loginClient = async (req,res)=>{
     try{
         const client = await Client.findOne({username:req.body.username} );
         console.log(client);
         if (client){
             if(client.password === req.body.password){
-                res.send(client);
+                const token = jwt.sign({_id: client._id},secret.ACCESS_TOKEN_SECRET);
+
+                console.log(token);
+
+                res.send(token);
             }
             else{
-                res.send("oumourk teaaba bro (mdp ghalt etfakr u arjaa)")
+                res.send("wrong password !")
             }
         }
         else {
             
-            res.status(404).send("bro mafamech menou username hedha ");
+            res.status(404).send("username not found ! ");
 
         }
     }
@@ -83,7 +90,7 @@ const updateClient = async (req,res)=>{
     }
  };
 
- const addCommandeCli = async (req,res)=>{
+const addCommandeCli = async (req,res)=>{
     try{
         let client = await Client.findById(req.params.id);
         let newCommande = new Commande(req.body);
@@ -101,7 +108,7 @@ const updateClient = async (req,res)=>{
 
 export default {
     getAllClient,
-    addClient,
+    registerClient,
     getClientById,
     updateClient,
     deleteClient,
