@@ -10,6 +10,12 @@ const productSchema = new mongoose.Schema({
     {
         type:Number,
         require:true,
+        validate:{
+            validator:function(value){
+                return value > 0 
+            },
+            message: "fama chey belch "
+        }
     },
     stock:{
         type:Number,

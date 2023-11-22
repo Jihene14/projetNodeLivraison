@@ -1,6 +1,7 @@
 import Fournisseur from "../models/fournisseur.js"
 import Product from "../models/product.js"
-
+import jwt from "jsonwebtoken";
+import secret from "../vars/var.js";
 
 const addFournisseur = async (req,res)=>{
     try{
@@ -79,11 +80,16 @@ const deleteFournisseur =async (req,res)=>{
 
  const loginFournisseur = async (req,res)=>{
     try{
-        const fournisseur = await Fournisseur.findOne({username:req.body.username} );
+        const fournisseur = await Fournisseur.findOne({username:req.body.username} ).populate("products");
         console.log(fournisseur);
         if (fournisseur){
             if(fournisseur.password === req.body.password){
-                res.send(fournisseur);
+                const token = jwt.sign({ _id: fournisseur._id }, secret.ACCESS_TOKEN_SECRET);
+
+                console.log(token);
+        
+                res.json({ token: token, fournisseur });
+       
             }
             else{
                 res.send("oumourk teaaba bro (mdp ghalt etfakr u arjaa)")

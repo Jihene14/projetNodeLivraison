@@ -2,7 +2,7 @@ import Product from "../models/product.js"
 
  const getAllProducts = async (req,res)=>{
     try{
-        const allProducts = await Product.find();
+        const allProducts = await Product.find()
         res.send(allProducts);
     }
     catch (e){
@@ -26,7 +26,7 @@ import Product from "../models/product.js"
 
 const getProductById = async(req,res)=>{
    try{
-       const product = await Product.findById(req.params.id);
+       const product = await Product.findById(req.params.id).populate('fournisseur');
        res.send(product);
    }
    catch(e){

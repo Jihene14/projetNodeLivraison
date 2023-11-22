@@ -1,10 +1,6 @@
 import mongoose from "mongoose";
 
 const livraisonSchema = new mongoose.Schema({
-    num_livraison:{
-        type: Number,
-        require:true,
-    },
     commandes:[{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'commande',
