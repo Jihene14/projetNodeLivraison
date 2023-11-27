@@ -53,12 +53,13 @@ const getAllFournisseur = async (req, res) =>{
 
 const addProductFour = async (req,res)=>{
     try{
-        let fournisseur = await Fournisseur.findById(req.params.id);
+        let fournisseur = await Fournisseur.findById(req.user._id);
         let newProduct = new Product(req.body);
+        console.log(fournisseur);
         newProduct.fournisseur=fournisseur._id;
         const product= await newProduct.save();
         fournisseur.products.push(product._id);
-        fournisseur.save();
+        await fournisseur.save();
         res.send(fournisseur);
     }
     catch(e){

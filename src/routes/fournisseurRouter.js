@@ -10,7 +10,7 @@ fournisseurRouter.post("/", controller.addFournisseur);
 
 // ta3tit id mit3 fournisseur w fi body 3adi produit mit3k taw rigel jawo
 fournisseurRouter.put(
-  "/addProduct/:id",
+  "/addProduct",
   authenticateToken,
   controller.addProductFour
 );

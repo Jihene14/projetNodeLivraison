@@ -13,14 +13,14 @@ const app = express();
 
 const corsOpts = {
     origin: "*",
-    methods: ["GET", "POST"],
+    methods: ["GET", "POST","PUT","DELETE"],
     allowedHeaders: ["Content-Type"],
   };
 
 connectToBd();
 app.use(cors({corsOpts,
   Credentials : true,
-  origin:['http//localhost:3000','http//localhost:8080','http//localhost:4200']
+  origin:['http//localhost:4200']
 }));
 app.use(express.json());
 app.use("/clients", clientRouter);
