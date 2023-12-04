@@ -5,8 +5,6 @@ const commandeSchema = new mongoose.Schema({
     type: Number,
     require: true,
   },
-
-  // tinajem tikoun non passer wala passer wala en cour fi 3outh class panier 
   etat: {
     type: String,
     require: true,

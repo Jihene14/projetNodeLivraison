@@ -86,10 +86,11 @@ const loginClient = async (req, res) => {
 
 const addCommandeCli = async (req, res) => {
   try {
-    let client = await Client.findById(req.params.id);
-    let newCommande = new Commande(req.body);
+    let client = await Client.findById(req.user._id);
+    console.log({ id: req.user._id, client })
+    let newCommande = new Commande({ ...req.body, client: client._id });
     for (let i = 0; i < req.body.produits.length; i++) {
-      let newproduct = await product.findById(req.body.produits[i].id);
+      let newproduct = await product.findById(req.body.produits[i]._id);
 
       let newLignCmmande = new LignCmmande({
         prix: newproduct.price,
@@ -103,7 +104,7 @@ const addCommandeCli = async (req, res) => {
       } else {
         newproduct.stock = newproduct.stock - req.body.produits[i].qte;
       }
-
+      console.log({ newproduct })
       await newproduct.save();
       await newLignCmmande.save();
       newCommande.lignCommandes.push(newLignCmmande._id);
