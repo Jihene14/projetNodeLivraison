@@ -12,21 +12,23 @@ import authenticateToken from "./src/middleWare/authentification.js";
 const app = express();
 
 const corsOpts = {
-    origin: "*",
-    methods: ["GET", "POST","PUT","DELETE"],
-    allowedHeaders: ["Content-Type"],
-  };
+  origin: "*",
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type"],
+};
 
 connectToBd();
-app.use(cors({corsOpts,
-  Credentials : true,
-  origin:['http//localhost:4200']
-}));
+app.use(cors())
+
+// app.use(cors({corsOpts,
+//   Credentials : true,
+//   origin:['http//localhost:4200']
+//}));
 app.use(express.json());
 app.use("/clients", clientRouter);
-app.use("/products",authenticateToken,productRouter);
-app.use("/fournisseurs",fournisseurRouter);
-app.use("/commandes",authenticateToken,commandeRouter);
-app.use("/livreurs",livreurRouter);
-app.use("/livraisons",authenticateToken,livraisonRouter);
-app.listen(3000,()=>{console.log("khedmet");});
+app.use("/products", productRouter);
+app.use("/fournisseurs", fournisseurRouter);
+app.use("/commandes", commandeRouter);
+app.use("/livreurs", livreurRouter);
+app.use("/livraisons", authenticateToken, livraisonRouter);
+app.listen(3000, () => { console.log("khedmet"); });
