@@ -56,6 +56,7 @@ const addProductFour = async (req,res)=>{
         let fournisseur = await Fournisseur.findById(req.user._id);
         let newProduct = new Product(req.body);
         console.log(fournisseur);
+        newProduct.img=req.body.image;
         newProduct.fournisseur=fournisseur._id;
         const product= await newProduct.save();
         fournisseur.products.push(product._id);

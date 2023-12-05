@@ -29,7 +29,7 @@ const registerClient = async (req, res) => {
 
 const getClientById = async (req, res) => {
   try {
-    const client = await Client.findById(req.params.id);
+    const client = await Client.findById(req.user._id).populate({path:"commandes",populate:{path:"lignCommandes",populate:"product"}});
 
     res.send(client);
   } catch (e) {
