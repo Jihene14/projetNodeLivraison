@@ -9,7 +9,8 @@ import livreurRouter from "./src/routes/livreurRouter.js";
 import livraisonRouter from "./src/routes/livraisonRouter.js";
 import authenticateToken from "./src/middleWare/authentification.js";
 import swaggerUi from "swagger-ui-express";
-import swaggerDocument from "./swagger_output.json" assert { type: 'json' };; 
+import swaggerDocument from "./swagger_output.json" assert { type: 'json' };
+import bodyParser from 'body-parser';
 
 const app = express();
 
@@ -26,6 +27,9 @@ app.use(cors(
 app.use(express.json());
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, { swaggerUrl: '/api-docs' }));
+app.use(bodyParser.json({ limit: '50mb' }));
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({limit: '50mb'}));
 
 app.get("/", (req, res) => {
   res.send("salut");
