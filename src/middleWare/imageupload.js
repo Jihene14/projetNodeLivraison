@@ -7,10 +7,10 @@ const myStorage=multer.diskStorage({
     destination:'./upload',
     filename:(req,file,redirect)=>{
         console.log("ss")
-       
-        req.body.image=Date.now()+'.'+file.mimetype.split('/')[1]
+      let name=Date.now();
+        req.body.image=name+'.'+file.mimetype.split('/')[1]
         console.log(req.body.image);
-        redirect(null,Date.now()+'.'+file.mimetype.split('/')[1]);
+        redirect(null,name+'.'+file.mimetype.split('/')[1]);
     }
     
 })

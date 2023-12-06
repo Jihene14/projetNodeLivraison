@@ -5,7 +5,7 @@ import upload from "../middleWare/imageupload.js";
 const fournisseurRouter = express.Router();
 
 fournisseurRouter.get("/", controller.getAllFournisseur);
-fournisseurRouter.get("/:id", authenticateToken, controller.getFournisseurById);
+fournisseurRouter.get("/getById", authenticateToken, controller.getFournisseurById);
 fournisseurRouter.post("/", controller.addFournisseur);
 
 // ta3tit id mit3 fournisseur w fi body 3adi produit mit3k taw rigel jawo

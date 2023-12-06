@@ -18,7 +18,7 @@ const addFournisseur = async (req,res)=>{
 };
 const getFournisseurById = async(req,res)=>{
     try{
-        const fournisseur = await Fournisseur.findById(req.params.id);
+        const fournisseur = await Fournisseur.findById(req.user._id).populate("products");
         res.send(fournisseur);
     }
     catch(e){

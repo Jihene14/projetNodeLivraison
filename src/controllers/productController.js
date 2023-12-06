@@ -37,7 +37,11 @@ const getProductById = async (req, res) => {
 
 const updateProduct = async (req, res) => {
     try {
-        const updateProduct = await Product.findByIdAndUpdate({ _id: req.params.id }, { ...req.body });
+        let updateProduct = await Product.findByIdAndUpdate({ _id: req.params.id }, { ...req.body });
+        if(req.body.image){
+            updateProduct.img=req.body.image;
+           await updateProduct.save();
+        }
         res.send(updateProduct);
     }
     catch (e) {
@@ -47,8 +51,8 @@ const updateProduct = async (req, res) => {
 };
 const deleteProduct = async (req, res) => {
     try {
-        const product = await Product.findByIdAndDelete(req.params.id, req.body);
-        res.send("Product deleted");
+        const product = await Product.findByIdAndDelete(req.params.id);
+        res.json({msg:"Product deleted"});
     }
     catch (e) {
         console.log(e);
