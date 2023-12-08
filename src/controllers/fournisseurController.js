@@ -94,12 +94,14 @@ const deleteFournisseur =async (req,res)=>{
        
             }
             else{
-                res.send("oumourk teaaba bro (mdp ghalt etfakr u arjaa)")
+                res.send("wrong password !! ");
+                
             }
         }
         else {
             
-            res.status(404).send("bro mafamech menou username hedha ");
+            res.status(404).send("wrong username !!  ");
+           
 
         }
     }

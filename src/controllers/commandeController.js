@@ -12,7 +12,7 @@ const getAllCommande = async (req, res) => {
 
 const getCommandeById = async (req, res) => {
     try {
-        const commande = await Commande.findById(req.params.id).populate("client").populate({
+        const commande = await Commande.findById(req.params.id).populate({path:"client",populate:"adresse"}).populate({
             path: 'lignCommandes',
             populate: { path: 'product', model: 'product' }
         });

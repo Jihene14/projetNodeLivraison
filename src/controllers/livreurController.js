@@ -71,10 +71,12 @@ const loginLivreur = async (req, res) => {
         res.json({ token: token, livreur });
        
       } else {
-        res.send("oumourk teaaba bro (mdp ghalt etfakr u arjaa)");
+        res.send("wrong password !!");
+       
       }
     } else {
-      res.status(404).send("bro mafamech menou username hedha ");
+      res.status(404).send("wrong username !! ");
+      
     }
   } catch (e) {
     console.log(e);

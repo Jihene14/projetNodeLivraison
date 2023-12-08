@@ -23,7 +23,7 @@ const registerClient = async (req, res) => {
     res.send(newClient);
   } catch (e) {
     console.log(e);
-    res.send(e);
+    res.status(500).send(e);
   }
 };
 
@@ -74,9 +74,11 @@ const loginClient = async (req, res) => {
         res.json({ token: token, client });
       } else {
         res.send("wrong password !");
+        
       }
     } else {
       res.status(404).send("username not found ! ");
+      
     }
   } catch (e) {
     console.log(e);

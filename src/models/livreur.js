@@ -3,15 +3,16 @@ import mongoose from "mongoose";
 const livreurSchema = new mongoose.Schema({
 username:{
     type:String,
-    require:true,
+    required:true,
+    unique: true,
 },
 password:{
     type:String,
-    require:true,
+    required:true,
 },
 tel:{
     type:String,
-    require:true,
+    
 },
 livraisons: [{
     type: mongoose.Schema.Types.ObjectId,

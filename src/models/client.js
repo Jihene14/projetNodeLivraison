@@ -3,41 +3,43 @@ import adresseSchema from "./adresse.js";
 const clientSchema = new mongoose.Schema({
   nom: {
     type: String,
-    require: true,
+    
   },
   prenom: {
     type: String,
-    require: true,
+    
   },
   username: {
     type: String,
-    dropDups: true,
-    require: true,
+    
+    unique: true,
+    required: true,
   },
   password: {
     type: String,
-    require: true,
+    required: true,
   },
   tel: {
     type: String,
-    require: true,
+    required: true,
+    minlength: [8, 'Le numéro doit contenir au moins 8 chiffres.'],
   },
   adresse: {
     ville: {
       type: String,
-      require: true,
+      required: true,
     },
     region: {
       type: String,
-      require: true,
+      required: true,
     },
     rue: {
       type: String,
-      require: true,
+      required: true,
     },
     poste: {
       type: String,
-      require: true,
+      required: true,
     },
   },
   commandes: [
